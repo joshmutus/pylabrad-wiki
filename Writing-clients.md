@@ -18,7 +18,7 @@ answer_to_bar = result['bar']
 You can set your own keys for each request
 
 ```python
-p = cxn.my_erver.packet()
+p = cxn.my_server.packet()
 p.foo(args, key='banana')
 result = p.send()
 answer_foo = result['banana']
