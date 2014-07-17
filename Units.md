@@ -1,4 +1,4 @@
-pylabrad supports units: physical quantities with a unit such as meter or gigahertz.  It is required to use units when invoking labrad settings that specify that they take a quantity with specific units (type tag v[Hz] or similar), but it is recommended that you use them in all of your code to help avoid bugs like those that crashed the Mars Climate Orbiter.
+pylabrad supports units: physical quantities with a unit such as meter or gigahertz.  It is required to use units when invoking labrad settings that specify units (type tag v[Hz] or similar), but it is recommended that you use them in all of your code to help avoid bugs like those that caused the crash of the [Mars Climate Orbiter](http://en.wikipedia.org/wiki/Mars_Climate_Orbiter).
 
 ```python 
 import labrad.units as U
