@@ -36,3 +36,17 @@ result = p.send(wait=False) # This is not a blocking call
 # result['foo'] to retrieve the result of our request.
 result.wait() #XXX Is this right?
 ```
+
+#### Contexts
+
+Each labrad request happens within a specific context.  Servers use that context to store specific information about the client such as their current working directory  (datavault, registry) or the currently selected GPIB device (any GPIB device server).  Each client gets its own default context, which is normally all you need.  To get a new context (for instance to avoid trampling over the working directory, or for keeping pipelined requests to the qubit sequencer separate):
+
+```python
+ctx = cxn.context()  # Returns a tuple like (0, 5)
+p = cxn.my_server.packet(context=ctx)
+p.foo(args)
+p.send()
+```
+
+#### Debugging tips
+
