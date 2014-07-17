@@ -1,7 +1,7 @@
 LabRAD data is specified by type tags that specify the binary format and interpretation of data transmitted over the network.  pylabrad maps these data types to native python types, so data received from the network is automatically unflattened to the appropriate python type, and vice versa.  
 
 | LabRAD type tag | Python data type | Notes |
-| :--------------:|:-----------------|:-----:|
+| :--------------:|:-----------------|:------|
 | b               | True/False       | Boolean value |
 | i               | int              | 32 bit signed integer |
 | w               | long             | 32 bit unsigned integer |
