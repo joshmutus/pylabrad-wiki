@@ -25,6 +25,7 @@ x['cm']
 >>> array([100, 200, 300, 400, 500])
 x[1:3]
 >>> ValueArray(array([2., 3.]), 'm') 
+```
 
 Any expression involving units which results in a dimensionless quantity (all of the base units cancel) generates an ordinary float/complex/ndarray which can be passed to any numeric function.  For instance `sin(2*np.pi*w*t)` will work properly if `w` and `t` have the appropriate units, but `sin(2*np.pi*t)` will not -- you cannot compute the sin of 3 seconds.  You can also get bare numbers out by using the x['ns'] notation.  Note that radians are a valid unit, but they don't get special treatment.  If you have quantities in radians you will need to use [] to extract a floating point.
 
