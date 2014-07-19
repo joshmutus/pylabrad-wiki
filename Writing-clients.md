@@ -48,5 +48,21 @@ p.foo(args)
 p.send()
 ```
 
+#### Signals
+
+Labrad servers can send signals.  Signals are asynchronous notifications from servers that do not come as a reply to a particular request.  Each client must register to receive a particular signal in order for it to be delivered.  Setting up a client to receive a notification is a two step process:
+
+```python
+def signal_handler(message_ctx, data):
+   print("Got signal in context %s with data: %s" % (message_ctx, data))
+
+def set_listner(cxn, server, ctx=None):
+    notification_ID = 4444
+    cxn._backend.cxn.addListener(signal_handler, source=server.ID, context=ctx, ID=notification_ID)
+    server.signal_name.notify_on_change(notification_ID, True, context=ctx) # True enables notification
+```
+
+The addListner call sets up the local client code so that when it receives a notification from a specific server with a specific ID and context to dispatch it to the registered function.  The notify_on_change call sends a message to the server telling it that we want to receive notifications, and that they should be send to use with the ID and context specified.  The ID (`4444` here) serves much the same purpose as a server's setting ID.  It is used to route each notification to the proper handler.  It can be anything, but it must be unique: a client can't use the same notification ID for two messages.
+
 #### Debugging tips
 
