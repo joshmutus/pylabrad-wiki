@@ -1,4 +1,4 @@
-You can write a server simply by subclassing the LabradServer class and using the @setting decorator
+You can write a server simply by subclassing the LabradServer class and using the `@setting` decorator
 
 ```python
 from labrad.server import LabradServer, setting
