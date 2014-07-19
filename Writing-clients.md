@@ -5,7 +5,7 @@ myServer = cxn.my_server
 result = my_server.foo(args)
 ```
 
-#### Send multiple requests at once
+#### Use a "packet" to send multiple requests at once
 
 ```python
 p = cxn.my_server.packet()
@@ -15,13 +15,15 @@ result = p.send() # This is a blocking call
 answer_to_foo = result['foo']
 answer_to_bar = result['bar']
 ```
-You can set your own keys for each request
+`result` is a dictionary keyed by the name of each setting.  If you invoke the same setting multiple times in a single packet the result is a list.  Alternately, you can set your own keys for each request
 
 ```python
 p = cxn.my_server.packet()
 p.foo(args, key='banana')
+p.foo(args, key='orange')
 result = p.send()
-answer_foo = result['banana']
+answer_foo1 = result['banana']
+answer_foo2 = result['orange']
 ```
 
 #### Send a request to a server without waiting for the answer
@@ -29,12 +31,13 @@ answer_foo = result['banana']
 ```python
 p = cxn.my_server.packet()
 p.foo(args)
-result = p.send(wait=False) # This is not a blocking call
+result_future = p.send(wait=False) # This is not a blocking call
 <other code>
 # Now we want to wait for the answer to our request.
 # Once this call completes, we will be able to do
 # result['foo'] to retrieve the result of our request.
-result.wait() #XXX Is this right?
+result = result_future.wait()
+print("result of foo is: ", result['foo']
 ```
 
 #### Contexts
