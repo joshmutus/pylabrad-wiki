@@ -87,8 +87,8 @@ time to complete.
 Let's see what happens if we try to get both the Squaring Server and the
 Addition Server to serve requests at the same time.
 Fire up the Addition Server on your local machine.
-Import the synchronous-client-2.py and run its `square_and_add` function.
-Here's synchronous-client-2.py:
+Import synchronousclient_2.py and run its `square_and_add` function.
+Here's synchronousclient_2.py:
 
 ```python
 import labrad
@@ -96,28 +96,41 @@ import time
 
 def square_and_add(cxn, square_me, x, y):
     ss = cxn.squaring_server
-    as = cxn.addition_server
-    t_start = time.clock()
+    ads = cxn.addition_server
+    t_start = time.time()
+    
     print("Sending request to Squaring Server")
     squared = ss.square(square_me)
+    t_square = time.time()
+    print("Got result %f**2 = %f after %f seconds"%\
+        (square_me, squared, t_square-t_start))
+    
     print("Sending request to Addition Server")
-    summed = as.add(x, y)
-    t_total = time.clock() - t_start
-    print("Time taken = %f seconds."%(len(numbers), t_total))
+    summed = ads.add(x, y)
+    t_summed = time.time()
+    print("Got result %d + %d = %d after %f seconds"%\
+        (x, y, summed, t_summed - t_square))
+    t_total = t_summed - t_start
+    print("Total time taken = %f seconds."%(t_total,))
     return squared, summed
 ```
 
 In your python shell, type the following:
 
 ```python
-import synchronous-client-2 as sc2
+import synchronousclient_2 as sc2
 sc2.square_and_add(cxn, 1.414, 2, 5)
 ```
 
-You shoud see output something like this:
+You should see output something like this:
 
 ```python
->>> Finished after 3.0 seconds
+Sending request to Squaring Server
+Got result 1.414**2 = 1.99 after 2.004 seconds
+Sending request to Addition Server
+Got result 2 + 5 = 7 after 1.004 seconds
+Total time taken = 3.008 seconds.
+>>> (1.999, 7.0)
 ```
 
 If you look in the Addition Server's code, you'll see that the `add`
