@@ -9,7 +9,7 @@ LabRAD data is specified by type tags that specify the binary format and interpr
 | v[]             | float            | Dimensionless real / floating point value |
 | c[unit]         | Complex(a+1j*b, 'unit') | Complex number with physical units |
 | c[]             | complex          | Dimensionless complex number |
-| v, c            |                  | float/complex with unspecified units.  Deprecated, use v[] and c[] |
+| v, c            | float/complex    | float/complex with unspecified units. Pending deprecation (***) |
 | *X              | list/ndarray     | list(*) of elements of type 'X' |
 | *nX             | list/ndarray     | n-dimensional list(*)/array of type 'X' |
 | (...)           | tuple            | cluster of elements with specified type |
@@ -21,3 +21,5 @@ LabRAD data is specified by type tags that specify the binary format and interpr
 (*) LabRAD list types unflatten as a LazyList -- a type that emulates a list but doesn't unflatten the raw data until you use it.  If it is passed on to another labrad server, it need never be unflattened.  In addition, if the list holds numeric data, the .asarray property unflattens it as a numpy ndarray which is much more efficient for large data structures.
 
 (**) ? is an incomplete data type.  LabRAD servers can advertise ? to indicate they accept or return any type of labrad data, but it is always replaced with a concrete data type when transmitted over the wire.
+
+(***) v and c have two separate uses.  One is as a type pattern for server settings, where it means "this setting accepts values in any possible units."  The other is in the wire protocol.  If 'v' data is transmitted over the wire to a settings with a v[unit] type tag, the manager will 'convert' the data to the specified units.  This use is deprecated and will be eventually removed.
