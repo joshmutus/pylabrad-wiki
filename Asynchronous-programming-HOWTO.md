@@ -223,7 +223,7 @@ Addition Server to run `add`, again with `wait=False`.
 Both servers will start cranking away at their respective computations.
 We then call `.wait()` on the two resulting futures in any order to
 collect the results.
-The code to do tihs is in `[asynchronousclient_1.py](asynchronousclient_1.py)`,
+The code to do tihs is in [asynchronousclient_1.py](asynchronousclient_1.py),
 which is reproduced here:
 
 ```python
