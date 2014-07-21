@@ -126,21 +126,6 @@ computation.
 Combined with the 2 seconds needed by the squaring server, this gives a
 total 3 seconds needed for our `square_and_add` function.
 
-Consider the order of events in synchronous-client-2.
-First, we ask the Squaring Server to square 1.414.
-The Squaring server receives our request, precesses it over a period of 2
-seconds, and then sends the result back to the client (our local python
-shell).
-During this time, the Addition Server is doing absolutely nothing.
-We send our request to the Addition Server only after we get a response
-from the Squaring Server.
-Suppose the Squaring and Addition servers were on two different
-computers.
-In that case, waiting for the Squaring Server to to respond before
-sending a request to the Addition Server, makes no sense.
-The answer to "2+5" has nothing to do with the result of 1.414**2,
-so we might as well get both computations started at the same time.
-
 In python, each line of code must complete before the next one can
 execute.
 In synchronous-client-2, the line
@@ -160,7 +145,21 @@ Addition Server.
 
 ### Asynchronous client
 
-pylabrad makes this easy, for example:
+Consider the order of events in synchronous-client-2.
+First, we ask the Squaring Server to square 1.414.
+The Squaring server receives our request, precesses it over a period of 2
+seconds, and then sends the result back to the client (our local python
+shell).
+During this time, the Addition Server is doing absolutely nothing.
+We send our request to the Addition Server only after we get a response
+from the Squaring Server.
+Suppose the Squaring and Addition servers were on two different
+computers.
+In that case, waiting for the Squaring Server to to respond before
+sending a request to the Addition Server, makes no sense.
+The answer to "2+5" has nothing to do with the result of 1.414**2,
+so we might as well get both computations started at the same time.
+In pylabrad, this is easy:
 
 ```python
 response = squaring_server.square(1.414, wait=False)
