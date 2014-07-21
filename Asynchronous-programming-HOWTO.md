@@ -1,5 +1,3 @@
-WARNING: This example has not actually been tested yet, and needs significant editin before it can be considered anywhere near complete -DTS
-
 ### Purpose
 
 In this HOWTO, we investigate asynchronous behavior in pylabrad servers and
@@ -103,7 +101,7 @@ def square_and_add(cxn, square_me, x, y):
     squared = ss.square(square_me)
     t_square = time.time()
     print("Got result %f**2 = %f after %f seconds"%\
-        (square_me, squared, t_square-t_start))
+        (square_me, squared, t_square - t_start))
     
     print("Sending request to Addition Server")
     summed = ads.add(x, y)
@@ -225,7 +223,7 @@ Addition Server to run `add`, again with `wait=False`.
 Both servers will start cranking away at their respective computations.
 We then call `.wait()` on the two resulting futures in any order to
 collect the results.
-The code to do tihs is in `[asynchronousclient_1.py](asynchronousclient-1.py)`,
+The code to do tihs is in `[asynchronousclient_1.py](asynchronousclient_1.py)`,
 which is reproduced here:
 
 ```python
