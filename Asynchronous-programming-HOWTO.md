@@ -30,7 +30,7 @@ finishes and the result comes back.
 This is due to the 2 second delay in the `square` setting.
 Now we will ask the server to square two numbers, one after the other.
 This time we write our commands as a script.
-Your can find the script in [synchronous-client-1](synchronous-client-1.py),
+Your can find the script in [synchronousclient_1.py](synchronousclient_1.py),
 which is reproduced here:
 
 ```python
