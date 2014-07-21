@@ -85,8 +85,8 @@ time to complete.
 Let's see what happens if we try to get both the Squaring Server and the
 Addition Server to serve requests at the same time.
 Fire up the Addition Server on your local machine.
-Import synchronousclient_2.py and run its `square_and_add` function.
-Here's synchronousclient_2.py:
+Import [synchronousclient_2.py](synchronousclient_2.py) and run its `square_and_add` function.
+Here's a copy/paste of synchronousclient_2.py:
 
 ```python
 import labrad
