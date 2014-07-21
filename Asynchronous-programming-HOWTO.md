@@ -51,7 +51,7 @@ def square_numbers(cxn, numbers):
 In the interactive session, import it and run the `square_numbers` function:
 
 ```python
-import synchronous-client-1 as sc1
+import synchronousclient_1 as sc1
 sc1.square_numbers(cxn, (1, 2))
 ```
 
@@ -59,8 +59,8 @@ You should see the following output
 
 ```python
 >>> Starting synchronous requests...
->>> 1**2 = 1.0
->>> 2**2 = 2.0
+>>> 1.000000**2 = 1.000000
+>>> 2.000000**2 = 4.000000
 >>> Finished 2 requests after 4.0 seconds.
 ```
 
