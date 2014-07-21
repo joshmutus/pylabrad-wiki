@@ -141,7 +141,7 @@ total 3 seconds needed for our `square_and_add` function.
 
 In python, each line of code must complete before the next one can
 execute.
-In synchronous-client-2, the line
+In [synchronousclient_2](synchronousclient_2.py), the line
 
 ```python
 squared = ss.square(square_me)
@@ -158,7 +158,7 @@ Addition Server.
 
 ### Asynchronous client
 
-Consider the order of events in synchronous-client-2.
+Consider the order of events in [synchronousclient_2](synchronousclient_2.py).
 First, we ask the Squaring Server to square 1.414.
 The Squaring server receives our request, precesses it over a period of 2
 seconds, and then sends the result back to the client (our local python
@@ -172,10 +172,12 @@ In that case, waiting for the Squaring Server to to respond before
 sending a request to the Addition Server, makes no sense.
 The answer to "2+5" has nothing to do with the result of 1.414**2,
 so we might as well get both computations started at the same time.
-In pylabrad, this is easy:
+In pylabrad, this is easy.
+We tell pylabrad to not wait for the result of a server request by setting
+`wait=False` in the request:
 
 ```python
-response = squaring_server.square(1.414, wait=False)
+request = squaring_server.square(1.414, wait=False)
 ```
 
 This makes a request to the `square` setting but does not wait for the
@@ -183,7 +185,7 @@ result before going to the next line of code.
 Try it yourself in the interactive session.
 You'll notice that the line completes immediately.
 Since the line completes immediately, but we know that the `square`
-setting takes 2 seconds to complete, the value of `response` must not
+setting takes 2 seconds to complete, the value of `request` must not
 actually be the result of `1.414**2`.
 In fact, the result of a LabRAD setting called with `wait=False` is an
 object which represents the data to be returned at some point in the
@@ -191,13 +193,14 @@ future.
 Try typing
 
 ```python
-type(response)
+type(request)
 ```
 
 at the interactive session to see for yourself.
+You'll see that `request` is a `labrad.backend.Future`.
 Behind the scenes, the part of pylabrad which deals with network
-communication waits for the response from the squaring Server to come
-back, and when it does, it updates the `response` object with the
+communication waits for the data from the squaring Server to come
+back, and when it does, it updates the `request` object with the
 returned data.
 To explicitly wait for this data you can call `.wait()` on `response`.
 
@@ -205,10 +208,10 @@ To explicitly wait for this data you can call `.wait()` on `response`.
 squared = response.wait()
 ```
 
-Once the `wait()` call finishes, we are guaranteed that the expected data
-has been stored as `squared`.
+The `wait()` call blocks until the result is received from the Squaring Server,
+at which point it returns that result and stores it in `squared`.
 Objects representing results which may come later are called "futures" in
-computer programming.
+computer programming (hence the name `labrad.backend.Future`).
 
 The `.wait()` call is blocking.
 When we call `.wait` on a future, python will not go to the next line
@@ -219,11 +222,11 @@ servers run faster.
 We ask the Squaring Server to run `square`, using `wait=False`.
 Then, while that result is being computed, we can immediately ask the
 Addition Server to run `add`, again with `wait=False`.
-Both servers will stark cranking away at their respective computations.
+Both servers will start cranking away at their respective computations.
 We then call `.wait()` on the two resulting futures in any order to
 collect the results.
-The code to do tihs is in `asynchronous-client-1.py`, which is reproduced
-here:
+The code to do tihs is in `[asynchronousclient_1.py](asynchronousclient-1.py)`,
+which is reproduced here:
 
 ```python
 import labrad
@@ -231,30 +234,47 @@ import time
 
 def square_and_add(cxn, square_me, x, y):
     ss = cxn.squaring_server
-    as = cxn.addition_server
-    t_start = time.clock()
+    ads = cxn.addition_server
+    t_start = time.time()
     print("Sending request to Squaring Server")
     squared_future = ss.square(square_me, wait=False)
     print("Sending request to Addition Server")
-    summed_future = as.add(x, y, wait=False)
-    for future in [squared_future, summed_future]:
-        future.wait()
-    t_total = time.clock() - t_start
-    print("Time taken = %f seconds."%(len(numbers), t_total))
-    # XXX Fix semantics here, which are definitely wrong.
+    summed_future = ads.add(x, y, wait=False)
+    print("Waiting for results...")
+    squared = squared_future.wait()
+    summed = summed_future.wait()
+    print("done")
+    t_total = time.time() - t_start
+    print("%f**2 = %f"%(square_me, squared))
+    print("%d + %d = %d"%(x, y, summed))
+    print("Total time taken = %f seconds."%(t_total))
     return squared, summed
 ```
 
-To run it, in the interactive session, just do this
+To run it, in the interactive session, do this:
 
 ```python
-import asynchronous-client-1 as ac1
-result = ac1.square_and_add(1.414, 2, 5)
-# XXX Again, fix semantics
+import asynchronousclient_1 as ac1
+ac1.square_and_add(cxn, 1.414, 2, 5)
 ```
 
-This concludes the section on asynchronous behaviour in clients.
-Next, we will show how to handle asynchronous behaviour in servers.
+You should see output like
+
+```python
+Sending request to Squaring Server
+Sending request to Addition Server
+Waiting for results...
+done
+1.414000**2 = 16.000000
+3 + 6 = 9
+Total time taken = 2.005274 seconds.
+>>> (2.0, 7.0)
+```
+
+Note that the total time is the longest of the two requests we made.
+This illustrates the benefit of asynchronous (parallel) behavior:
+the time for the computation is the time of the longest part, rather than the
+sum of all the parts.
 
 ### Asynchronous Servers
 
