@@ -31,4 +31,16 @@ Here we specify how various combinations of python objects and type tags should 
 | '?'             | 5.0*Hz           | 5.0                    | v[Hz] |
 | '*v'            | [3*Hz, 5*km]     | error                  | - |
 | '*v'            | [3*Hz, 5*kHz]    | [3.0, 5000.0]          | v[Hz] |
-| '*v[kHz]'       |  [3*Hz, 5*kHz]    | [.003, 5000.0]        | v[kHz] |
+| '*v[kHz]'       |  [3*Hz, 5*kHz]    | [.003, 5.0]        | v[kHz] |
+| '*i'            | array(x,np.int32) | x                  | *i |
+| '*i'            | array(x,np.int64) | x                  | *i |
+| '*i'            | array(x,np.uint32) | x                  | *i |
+| '*i'            | array(x,np.uint64) | x                  | *i |
+| '*w'            | array(x,np.int32) | x                  | *w |
+| '*w'            | array(x,np.int64) | x                  | *w |
+| '*w'            | array(x,np.uint32) | x                  | *w |
+| '*w'            | array(x,np.uint64) | x                  | *w |
+| '*?'            | array(x,np.int32) | x                  | *i |
+| '*?'            | array(x,np.int64) | x                  | *i |
+| '*?'            | array(x,np.uint32) | x                  | *w |
+| '*?'            | array(x,np.uint64) | x                  | *w |
