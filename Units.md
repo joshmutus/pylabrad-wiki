@@ -55,17 +55,26 @@ AttributeError: sin
 
 In addition to the arithmetic operations, dimensioned quantities support the following methods and properties
 
-**units**
-    Returns the quantities units as a string
-**inUnitsOf**(_unit_)
+**unit**<br>
+    The units of the value as a Unit object
+
+**units**<br>
+    A property that returns the quantities units as a string
+
+**inUnitsOf**(_unit_)<br>
     Convert the quantity to the specified unit and return an object with the new units.  This always returns the same type as the original (Value, Complex, ValueArray)
-**inBaseUnits**(_unit_)
+
+**inBaseUnits**(_unit_)<br>
     Convert to SI base units
-**isCompatible(unit)
+
+**isCompatible**(_unit_)<br>
     Test to see if the value could be successfully converted to the specified units.
-**isDimensionless**()
+
+**isDimensionless**()<br>
     Test to see if the units cancel.  If this is true, you can treat the number just like a float/complex/array
-**sqrt**()
+
+**sqrt**()<br>
     Take the square root of the number including units
-**__getitem__**(_unit_)
-    The Indexing operator [] is used to convert to the specified units and then return that value as a base type (with no units attached).  For instance (5*MHz)['Hz'] == 1000000.0.
+
+**__getitem__**(_unit_)<br>
+The Indexing operator [] is used to convert to the specified units and then return that value as a base type (with no units attached).  For instance (5*MHz)['Hz'] == 1000000.0.
