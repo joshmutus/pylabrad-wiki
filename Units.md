@@ -7,14 +7,16 @@ pylabrad supports units: physical quantities with a unit such as meter or gigahe
 >>> x = U.Value(10.0, 'm') # Construct the quantity 10 meters
 >>> print x
 10.0 m
->>> print x['mm'] # Returns the value 10000.0 -- x in millimeters
+>>> x.inUnitsOf('mm')  # Converts the units and returns a Value with the new units
+Value(10000.0, 'mm')
+>>> print x['mm'] # Extracts the floating point value 10000.0 -- x in millimeters
 10000.0
 
 >>> y = x / (2 * ns) # 5 meters / nanosecond
 >>> y
 Value(5.0, 'm/ns')
 >>> print y['m/s']
-4999999999.999999     # Watch out for this.
+4999999999.999999
 
 >>> print 3*mm + 1*m 
 1003.0 mm
