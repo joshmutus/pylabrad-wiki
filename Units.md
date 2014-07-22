@@ -56,10 +56,10 @@ AttributeError: sin
 In addition to the arithmetic operations, dimensioned quantities support the following methods and properties
 
 **unit**<br>
-    The units of the value as a Unit object
+    The quantity's units as a Unit object
 
 **units**<br>
-    A property that returns the quantities units as a string
+    A property that returns the quantity's units as a string
 
 **inUnitsOf**(_unit_)<br>
     Convert the quantity to the specified unit and return an object with the new units.  This always returns the same type as the original (Value, Complex, ValueArray)
