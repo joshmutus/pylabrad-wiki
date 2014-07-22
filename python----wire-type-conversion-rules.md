@@ -34,15 +34,10 @@ Here we specify how various combinations of python objects and type tags should 
 | '*v[kHz]'       |  [3*Hz, 5*kHz]     | [.003, 5.0]       | v[kHz] |
 | '*i'            | array(x,np.int32)  | x                 | *i |
 | '*i'            | array(x,np.int64)  | x (*)             | *i |
-| '*i'            | array(x,np.uint32) | x (*)             | *i |
-| '*i'            | array(x,np.uint64) | x (*)             | *i |
-| '*w'            | array(x,np.int32)  | x (*)             | *w |
-| '*w'            | array(x,np.int64)  | x (*)             | *w |
-| '*w'            | array(x,np.uint32) | x                 | *w |
-| '*w'            | array(x,np.uint64) | x (*)             | *w |
-| '*?'            | array(x,np.int32)  | x                 | *i |
-| '*?'            | array(x,np.int64)  | x (*)             | *i |
-| '*?'            | array(x,np.uint32) | x                 | *w |
-| '*?'            | array(x,np.uint64) | x (*)             | *w |
+| '*i'            | array(x,np.uintNN) | x (*)             | *i |
+| '*w'            | array(x,np.intNN)  | x (*)             | *w |
+| '*w'            | array(x,np.uintNN) | x (*)             | *w |
+| '*?'            | array(x,np.intNN)  | x (*)             | *i |
+| '*?'            | array(x,np.uintNN) | x (*)             | *w |
 
 (*) Numpy integer type (int32,int64,uint32,uint64) conversions to 'i'/'w' may be subject to bounds checking.
