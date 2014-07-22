@@ -39,6 +39,9 @@ Any expression involving units which results in a dimensionless quantity (all of
 ```python
 >>> x = 0.5*np.pi*rad
 >>> np.sin(x) # raises an exception!
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+AttributeError: sin
 >>> np.sin(x['rad'])
 1.0
 ```
