@@ -23,6 +23,19 @@ Value(5.0, 'm/ns')
 
 >>> print 3*mm + 1*m 
 1003.0 mm
+
+>>> (5*Hz)**2
+Value(25.0, 'Hz^2')
+
+>>> (5*Hz)**(1.0/2)
+Value(2.23606797749979, 'Hz^1/2')
+
+>>> (5*Hz)**(2.0/3)
+...
+TypeError: Only integer or rational exponents allowed
+
+>>> ((5*Hz)**(1.0/3))**2
+Value(2.9240177382128656, 'Hz^2/3')
 ```
 Dimensioned quantities can be constructed either using the Value constructor (interchangeable with WithUnit or Complex), or by multiplying by the "unit" objects imported from labrad.units.  Basic arithmetic works as you expect: * and / multiply or divide units while + and - require the arguments to be in compatible units and do appropriate conversion.
 
