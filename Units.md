@@ -1,4 +1,7 @@
+### Introduction
 pylabrad supports units: physical quantities with a unit such as meter or gigahertz.  It is required to use units when invoking labrad settings that specify units (type tag v[Hz] or similar), but it is recommended that you use them in all of your code to help avoid bugs like those that caused the crash of the [Mars Climate Orbiter](http://en.wikipedia.org/wiki/Mars_Climate_Orbiter).
+
+### Examples
 
 ```python 
 >>> import labrad.units as U
@@ -47,3 +50,22 @@ AttributeError: sin
 >>> np.sin(x['rad'])
 1.0
 ```
+
+### Methods
+
+In addition to the arithmetic operations, dimensioned quantities support the following methods and properties
+
+**units**
+    Returns the quantities units as a string
+**inUnitsOf**(_unit_)
+    Convert the quantity to the specified unit and return an object with the new units.  This always returns the same type as the original (Value, Complex, ValueArray)
+**inBaseUnits**(_unit_)
+    Convert to SI base units
+**isCompatible(unit)
+    Test to see if the value could be successfully converted to the specified units.
+**isDimensionless**()
+    Test to see if the units cancel.  If this is true, you can treat the number just like a float/complex/array
+**sqrt**()
+    Take the square root of the number including units
+**__getitem__**(_unit_)
+    The Indexing operator [] is used to convert to the specified units and then return that value as a base type (with no units attached).  For instance (5*MHz)['Hz'] == 1000000.0.
