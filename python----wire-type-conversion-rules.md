@@ -21,3 +21,14 @@ Here we specify how various combinations of python objects and type tags should 
 | 'v[]'           | 4                | float(4)               | 'v[]' |
 | 'v'             | 4.5              | 4.5                    | 'v[]' |
 | 'v'             | 4.5*Hz           | 4.5 Hz                 | 'v[Hz]' |
+| '?'             | x = True/False   | x                      | 'b' |
+| '?'             | 5                | 5                      | 'i' |
+| '?'             | -5               | -5                     | 'i' |
+| '?'             | 5L               | 5                      | 'w' |
+| '?'             | -5L              | error / 5 (??)         | -/'i'   |
+| '?'             | 5.0              | 5.0                    | v[] |
+| '?'             | WithUnit(5, '')  | 5.0                    | v[] |
+| '?'             | 5.0*Hz           | 5.0                    | v[Hz] |
+| '*v'            | [3*Hz, 5*km]     | error                  | - |
+| '*v'            | [3*Hz, 5*kHz]    | [3.0, 5000.0]          | v[Hz] |
+| '*v[kHz]'       |  [3*Hz, 5*kHz]    | [.003, 5000.0]        | v[kHz] |
