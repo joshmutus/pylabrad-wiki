@@ -203,7 +203,7 @@ returned data.
 To explicitly wait for this data you can call `.wait()` on `response`.
 
 ```python
-squared = response.wait()
+squared = request.wait()
 ```
 
 The `wait()` call blocks until the result is received from the Squaring Server,
