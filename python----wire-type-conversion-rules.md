@@ -45,4 +45,4 @@ Here we specify how various combinations of python objects and type tags should 
 | '*?'            | array(x,np.uint32) | x (*)             | *w |
 | '*?'            | array(x,np.uint64) | x (*)             | *w |
 
-(*) Numpy integer type conversions to 'i'/'w' are subject to bounds checking
+(*) Numpy integer type (int32,int64,uint32,uint64) conversions to 'i'/'w' are subject to bounds checking
