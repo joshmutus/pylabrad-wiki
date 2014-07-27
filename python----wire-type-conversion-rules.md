@@ -1,6 +1,11 @@
 LabRAD servers advertise type tags for each argument in their settings. These type tags specify what types of data are allowed to be passed to the setting. On the sending side, the pylabrad client must take a given python object and convert it to one of the types advertised by the recipient setting.
 
-Here we specify how various combinations of python objects and type tags should be handled by pylabrad.
+Here we specify how various combinations of python objects and type tags should be handled by pylabrad. Python objects are written assuming the following imports
+
+```python
+from labrad.units import Hz, mHz
+from labrad.units import WithUnit
+```
 
 | LabRAD type tag | Python data      | Value sent by pylabrad | Type tag sent by pylabrad |
 | :--------------:|:-----------------|:-----------------------|:--------------------------|
