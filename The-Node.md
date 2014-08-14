@@ -24,4 +24,6 @@ The node files are here:
 * [The node itself](https://github.com/martinisgroup/pylabrad/blob/master/labrad/node/__init__.py) is in the labrad/node directory.
 * [The part that makes it a plugin](https://github.com/martinisgroup/pylabrad/blob/master/twisted/plugins/labrad_node.py) is in the twisted/plugin directory.
 
+Note that if you change the node such that there's a syntax error (i.e. so that the file errors on import) then the plugin will not show up in the list of twisted plugins (from `twistd --help`). You can check for import errors by simply doing `import labrad.node`.
+
 The twisted plugin docs are [here](https://twistedmatrix.com/documents/current/core/howto/tap.html).
