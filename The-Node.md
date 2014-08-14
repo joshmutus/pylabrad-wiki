@@ -24,4 +24,4 @@ The node files are here:
 * [The node itself](https://github.com/martinisgroup/pylabrad/blob/master/labrad/node/__init__.py) is in the labrad/node directory.
 * [The part that makes it a plugin](https://github.com/martinisgroup/pylabrad/blob/master/twisted/plugins/labrad_node.py) is in the twisted/plugin directory.
 
-The twisted plugin docs are [here](https://twistedmatrix.com/documents/current/core/howto/plugin.html).
+The twisted plugin docs are [here](http://twistedsphinx.funsize.net/projects/core/howto/plugin.html).
