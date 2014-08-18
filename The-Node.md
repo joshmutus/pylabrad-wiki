@@ -1,5 +1,12 @@
 The LabRAD Node is a server that is used for starting and stopping other servers.
 
+There are three files that are relevant to the node:
+* [The node itself](https://github.com/martinisgroup/pylabrad/blob/master/labrad/node/__init__.py)
+* [The twisted plugin for the node](https://github.com/martinisgroup/pylabrad/blob/master/twisted/plugins/labrad_node.py)
+* [The script to easily start the node](https://github.com/martinisgroup/pylabrad/blob/master/scripts/labradnode.py)
+
+Each of these is documented (in the module docstring, at least) with their relevant purposes and requirements (including e.g. registry keys).
+
 ## Running the Node
 
 The node is currently implemented as a Twisted plugin. As long as twisted.plugins.labrad_node is in your pythonpath, you can run the plugin like this:
@@ -19,10 +26,6 @@ You must point the node to the folder where your servers are stored. There is a 
 The node is fairly self-explanatory to use; key settings are `available_servers`, `running_servers`, `start`, `stop`, `status`, etc.
 
 ## Modifying the Node
-
-The node files are here:
-* [The node itself](https://github.com/martinisgroup/pylabrad/blob/master/labrad/node/__init__.py) is in the labrad/node directory.
-* [The part that makes it a plugin](https://github.com/martinisgroup/pylabrad/blob/master/twisted/plugins/labrad_node.py) is in the twisted/plugin directory.
 
 Note that if you change the node such that there's a syntax error (i.e. so that the file errors on import) then the plugin will not show up in the list of twisted plugins (from `twistd --help`). You can check for import errors by simply doing `import labrad.node`.
 
