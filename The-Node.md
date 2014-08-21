@@ -30,3 +30,6 @@ The node is fairly self-explanatory to use; key settings are `available_servers`
 Note that if you change the node such that there's a syntax error (i.e. so that the file errors on import) then the plugin will not show up in the list of twisted plugins (from `twistd --help`). You can check for import errors by simply doing `import labrad.node`.
 
 The twisted plugin docs are [here](https://twistedmatrix.com/documents/current/core/howto/tap.html).
+
+## Known issues
+If the node can start a server but then can't find it after it has started it (this manifests in the browser as an eternally spinning icon) then you probably just have the names mismatched. Python class variable for the server name must match the name in the node info section of the server. See the documentation [here](https://github.com/martinisgroup/pylabrad/blob/master/labrad/node/__init__.py#L48) and the ini file documentation [here](https://github.com/martinisgroup/pylabrad/blob/master/labrad/node/launchable-server.ini) for more info.
