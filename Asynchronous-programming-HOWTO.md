@@ -263,7 +263,7 @@ Sending request to Squaring Server
 Sending request to Addition Server
 Waiting for results...
 done
-1.414000**2 = 16.000000
+1.414000**2 = 1.99...
 3 + 6 = 9
 Total time taken = 2.005274 seconds.
 >>> (2.0, 7.0)
