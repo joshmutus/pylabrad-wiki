@@ -54,7 +54,7 @@ The second argument to every setting function (after self) is the context, usual
 
 #### Signals
 
-LabRAD support signals.  These are messages sent by servers triggered by an external event, rather than as a response to a specific client request.  For instance, the data vault sends a signal to every listening client when a new file is created.  This allows the grapher to update its display without polling the server.  Signals are declared in pylabrad servers like so:
+LabRAD support signals.  These are messages sent by servers triggered by an external event, rather than as a response to a specific client request.  For instance, the data vault sends a signal to every listening client when a new file is created.  This allows e.g. the grapher to update its display without polling the server.  Signals are declared in pylabrad servers like so:
 
 ```python
 from labrad.server import LabradServer, Signal, setting
