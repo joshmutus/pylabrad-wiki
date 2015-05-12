@@ -6,14 +6,14 @@ You can write a server simply by subclassing the LabradServer class and using th
 from labrad.server import LabradServer, setting
 from twisted.internet.defer import inlineCallbacks, returnValue
 
-class MyServer(LabradServer)
+class MyServer(LabradServer):
     name = "My Server"    # Will be labrad name of server
     
     @inlineCallbacks
     def initServer(self):  # Do initialization here
         pass
 
-    @setting(10, data='?', returns='b'):
+    @setting(10, data='?', returns='b')
     def is_true(self, c, data):
         return bool(data)
 
