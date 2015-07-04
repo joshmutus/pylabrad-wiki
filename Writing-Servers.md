@@ -39,7 +39,7 @@ Many servers need to make requests to other servers.  Each server has a 'client'
 Notice that servers always make asynchronous requests, so we must use yield to get the value of the Deferred.  We then must use returnValue to send the result back, just as if this were an inlineCallbacks method.
 #### Setting decorator
 
-The setting decorator takes a number of options.  The first, required option is the setting ID number.  The only requirement is that this must be a positive integer, and it must be unique within the server.  The second option is optional, and is the name of the setting to be advertized to the manager.  If left off, the name will be derived from the function name.  The remaining keyword options are the argument names and types, with the 'returns' keyword argument specifying the return type:
+The setting decorator takes a number of options.  The first, required option is the setting ID number.  The only requirement is that this must be a positive integer, and it must be unique within the server.  The second option is optional, and is the name of the setting to be advertized to the manager.  If left off, the name will be derived from the function name.  The remaining keyword options are the argument names and [types](https://github.com/labrad/pylabrad-wiki/blob/master/python----wire-type-conversion-rules.md), with the 'returns' keyword argument specifying the return type:
 
 ```python
     @setting(10, 'cd', path=['s', '*s', 'w'], returns='*s') # 'cd' is optional and redundant
